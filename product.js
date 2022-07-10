@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 // product_router.set('view engine', 'hbs');
 // product_router.use(express.static(__dirname + '/public'));
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) { // kiem tra xxem file co dc cham nhan hay ko
+    destination: function (req, file, cb) {
         cb(null, './public/uploads');
     },
     filename: function (req, file, cb) {
@@ -161,6 +161,7 @@ product_router.get('/addProduct', async (req, res) => {
         useUnifiedTopology: true
     });
     const db = client.db('cldproject');
+    const collection = db.collection('product');
 
     let categories1 = await db.collection('categories').find({}).toArray();
     let suppliers1 = await db.collection('suppliers').find({}).toArray();
